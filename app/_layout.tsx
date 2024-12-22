@@ -21,5 +21,5 @@ export default function RootLayout() {
             })();
         }
     }, [fontsLoaded]);
-    return <Stack/>;
+    return <Stack screenOptions={{headerShown: false}}/>;
 }
