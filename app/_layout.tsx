@@ -22,6 +22,9 @@ export default function RootLayout() {
             })();
         }
     }, [fontsLoaded]);
+    if (!fontsLoaded) {
+        return null;
+    }
     return (
         <GlobalProvider>
             <Stack screenOptions={{headerShown: false}}/>

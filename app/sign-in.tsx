@@ -2,9 +2,9 @@ import {View, Text, ScrollView, Image, TouchableOpacity, Alert} from 'react-nati
 import {SafeAreaView} from "react-native-safe-area-context";
 import images from "@/constants/images";
 import icons from "@/constants/icons";
-import {login} from "@/lib/appwrite";
+import {login, logout} from "@/lib/appwrite";
 import {useGlobalContext} from "@/lib/global-provider";
-import {Redirect} from "expo-router";
+import {Link, Redirect} from "expo-router";
 
 const SignIn = () => {
 
@@ -20,7 +20,7 @@ const SignIn = () => {
 
         if (result) {
             console.log('Login success')
-            refetch()
+           await refetch()
         } else {
             console.log('Login fail')
             Alert.alert('Failed to login')

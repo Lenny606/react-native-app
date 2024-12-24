@@ -14,12 +14,13 @@ export default function AppLayout() {
             </SafeAreaView>
         )
     }
-    if (!isLoggedIn) {
-        return (
-            <Redirect href={'/sign-in'}/>
-        )
-    }
+    //TODO check if user is logged in
+    // if (!isLoggedIn) {
+    //     return (
+    //         <Redirect href={'/'}/>
+    //     )
+    // }
 
     // Slot is a placeholder for the current screen
-    return Slot
+    return <Slot />
 }
