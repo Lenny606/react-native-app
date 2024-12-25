@@ -4,6 +4,7 @@ import {SafeAreaView} from "react-native-safe-area-context";
 import images from "@/constants/images";
 import icons from "@/constants/icons";
 import Search from "@/components/search";
+import {Card, FeatureCard} from "@/components/Cards";
 
 export default function Index() {
     return (
@@ -31,9 +32,29 @@ export default function Index() {
                             </Text>
                         </TouchableOpacity>
                     </View>
+                    <View className={'flex flex-row gap-5 mt-5'}>
+                        <FeatureCard />
+                        <FeatureCard />
+                        <FeatureCard />
+                    </View>
+
+                    {/*<Card />*/}
+                </View>
+                <View className={'flex flex-row items-center justify-between'}>
+                    <Text className={'text-xl font-rubikBold text-black-200'}>
+                        Recommended
+                    </Text>
+                    <TouchableOpacity>
+                        <Text className={'text-base font-rubikBold text-primary-300'}>
+                            See All
+                        </Text>
+                    </TouchableOpacity>
+                </View>
+                <View className={'flex flex-row gap-5 mt-5'}>
+                    <Card />
+                    <Card />
                 </View>
             </View>
-
         </SafeAreaView>
     );
 }
