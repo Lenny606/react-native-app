@@ -14,7 +14,7 @@ import {useEffect} from "react";
 import NoResults from "@/components/NoResults";
 
 export default function Index() {
-
+//TODO fix filter + search
     const {user} = useGlobalContext()
     const params = useLocalSearchParams<{ query?: string, filter?: string }>()
     const {data: latestProperties, loading: latestPropertiesLoading} = useAppwrite({
