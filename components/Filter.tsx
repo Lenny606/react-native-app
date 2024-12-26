@@ -27,6 +27,7 @@ const Filter = () => {
             {
                 categories.map((item, index) => (
                     <TouchableOpacity
+                        key={index}
                         onPress={() => handleCategoryChange(item.category)}
                         className={`flex flex-col items-start mr-4 px-4 py-2 rounded-full bg-primary-200 border ${selectedCategory === item.category ? "border-primary-300" : "border-primary-200"}`}>
                         <Text className={'text-sm font-rubik-bold flex flex-row'}>{item.title}</Text>

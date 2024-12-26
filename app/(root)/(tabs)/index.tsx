@@ -1,4 +1,4 @@
-import {Button, FlatList, Image, Text, TouchableOpacity, View} from "react-native";
+import {ActivityIndicator, Button, FlatList, Image, Text, TouchableOpacity, View} from "react-native";
 import {Link, router, useLocalSearchParams} from "expo-router";
 import {SafeAreaView} from "react-native-safe-area-context";
 import images from "@/constants/images";
@@ -11,6 +11,7 @@ import seed from "@/lib/seed";
 import {useAppwrite} from "@/lib/useAppwrite";
 import {getLatestsProperites, getProperites} from "@/lib/appwrite";
 import {useEffect} from "react";
+import NoResults from "@/components/NoResults";
 
 export default function Index() {
 
@@ -46,7 +47,7 @@ export default function Index() {
             {/*<Button onPress={seed} title={"SEED DATA"} ></Button>*/}
             <FlatList data={properties}
                       renderItem={({item}) => <Card item={item} onPress={() => handleCardPress(item.$id)}/>}
-                      keyExtractor={(item) => item.toString()}
+                      keyExtractor={(item) => item.$id}
                       numColumns={2}
                       contentContainerClassName={'pb-32'}
                       columnWrapperClassName={'flex gap-5 px-5'}
@@ -77,14 +78,27 @@ export default function Index() {
                                       </TouchableOpacity>
                                   </View>
 
-                                  <FlatList data={latestProperties}
-                                            renderItem={({item}) => <FeatureCard item={item} onPress={() => handleCardPress(item.$id)}/>}
-                                            keyExtractor={(item) => item.toString()}
-                                            horizontal
-                                            showsHorizontalScrollIndicator={false}
-                                            bounces={false}
-                                            contentContainerClassName={'flex gap-5 mt-4'}
-                                  />
+                                  {
+                                      latestPropertiesLoading ?
+                                          <ActivityIndicator size={'large'} className={'text-black-200 mt-5'}/>
+                                          : !latestProperties || latestProperties.length === 0 ?
+                                              <NoResults/> : (
+                                                  <FlatList data={latestProperties}
+                                                            renderItem={({item}) => <FeatureCard item={item}
+                                                                                                 onPress={() => handleCardPress(item.$id)}/>}
+                                                            keyExtractor={(item) => item.$id}
+                                                            horizontal
+                                                            showsHorizontalScrollIndicator={false}
+                                                            bounces={false}
+                                                            contentContainerClassName={'flex gap-5 mt-4'}
+                                                            ListEmptyComponent={loading ? (
+                                                                <ActivityIndicator size={'large'}
+                                                                                   className={'text-black-200 mt-5'}/>
+                                                            ) : <NoResults/>}
+                                                  />
+                                              )
+                                  }
+
 
                                   {/*<View className={'flex flex-row gap-5 mt-5'}>*/}
                                   {/*    <FeatureCard/>*/}
